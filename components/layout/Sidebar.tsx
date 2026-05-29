@@ -6,8 +6,9 @@ import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import { 
   LayoutDashboard, BookOpen, Timer, Calendar, BarChart2, 
-  FileText, Trophy, Medal, User, LogOut, Zap, Menu, X
+  FileText, Trophy, Medal, User, LogOut, Menu, X
 } from 'lucide-react'
+import Image from 'next/image'
 import { getInitials } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -56,8 +57,8 @@ export default function Sidebar({ userName, userEmail }: SidebarProps) {
           style={{
             position: 'fixed', top: '16px', left: '16px', zIndex: 90,
             background: 'rgba(11,15,23,0.8)', backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px',
-            padding: '10px', color: '#f9fafb', cursor: 'pointer'
+            border: '1px solid var(--color-border)', borderRadius: '10px',
+            padding: '10px', color: 'var(--color-text-primary)', cursor: 'pointer'
           }}
         >
           <Menu size={20} />
@@ -85,10 +86,10 @@ export default function Sidebar({ userName, userEmail }: SidebarProps) {
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         style={{
           minHeight: '100vh',
-          background: 'rgba(0, 0, 0, 0.4)',
+          background: 'linear-gradient(180deg, rgba(90, 0, 255, 0.08) 0%, rgba(15, 5, 24, 0.8) 100%)',
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
-          borderRight: '1px solid rgba(255,255,255,0.08)',
+          borderRight: '1px solid var(--color-border)',
           display: 'flex',
           flexDirection: 'column',
           padding: '20px 12px',
@@ -98,27 +99,35 @@ export default function Sidebar({ userName, userEmail }: SidebarProps) {
         }}
       >
         {isMobile && (
-          <button onClick={() => setIsOpen(false)} style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: '#9ca3af' }}>
+          <button onClick={() => setIsOpen(false)} style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: 'var(--color-text-muted)' }}>
             <X size={20} />
           </button>
         )}
 
         {/* Logo */}
-        <div style={{ padding: '8px 10px 24px', borderBottom: '1px solid rgba(255,255,255,0.06)', marginBottom: '16px' }}>
+        <div style={{ padding: '8px 10px 24px', borderBottom: '1px solid var(--color-border)', marginBottom: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
-              width: '36px', height: '36px', background: 'linear-gradient(135deg, #84cc16, #65a30d)',
-              borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 0 16px rgba(132,204,22,0.3)', flexShrink: 0,
+              width: '36px', height: '36px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              filter: 'drop-shadow(0 0 8px rgba(123,44,255,0.5))', flexShrink: 0,
             }}>
-              <Zap size={18} color="#0b0f17" fill="#0b0f17" />
+              <Image 
+                src="/logo.png" 
+                alt="Foco 100Limite Logo" 
+                width={36} 
+                height={36} 
+                style={{ objectFit: 'contain', width: 'auto', height: 'auto' }} 
+                priority 
+                unoptimized 
+              />
             </div>
             <div>
-              <div style={{ fontSize: '15px', fontWeight: 800, color: '#f9fafb', letterSpacing: '-0.3px' }}>FOCO</div>
-              <div style={{ fontSize: '9px', fontWeight: 700, color: '#84cc16', letterSpacing: '2px', marginTop: '-2px' }}>100LIMITE</div>
+              <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--color-text-primary)', letterSpacing: '-0.3px' }}>FOCO</div>
+              <div style={{ fontSize: '9px', fontWeight: 700, color: 'var(--color-cyan-light)', letterSpacing: '2px', marginTop: '-2px' }}>100LIMITE</div>
             </div>
           </div>
-          <p style={{ fontSize: '11px', color: '#4b5563', marginTop: '10px', fontStyle: 'italic', paddingLeft: '2px' }}>
+          <p style={{ fontSize: '11px', color: 'var(--color-text-muted)', marginTop: '10px', fontStyle: 'italic', paddingLeft: '2px' }}>
             "Quem não mede, não evolui."
           </p>
         </div>
@@ -134,7 +143,7 @@ export default function Sidebar({ userName, userEmail }: SidebarProps) {
                 {isActive && (
                   <motion.div layoutId="sidebar-active-indicator" style={{
                     marginLeft: 'auto', width: '6px', height: '6px', borderRadius: '50%',
-                    background: '#84cc16', boxShadow: '0 0 8px rgba(132,204,22,0.6)',
+                    background: '#00C2FF', boxShadow: '0 0 8px rgba(0,194,255,0.6)',
                   }} />
                 )}
               </Link>
@@ -143,16 +152,16 @@ export default function Sidebar({ userName, userEmail }: SidebarProps) {
         </nav>
 
         {/* User Profile & Logout */}
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '16px', marginTop: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 10px', borderRadius: '10px', background: 'rgba(255,255,255,0.03)', marginBottom: '8px' }}>
+        <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '16px', marginTop: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 10px', borderRadius: '10px', background: 'var(--color-bg-card)', marginBottom: '8px' }}>
             <div className="avatar" style={{ width: '32px', height: '32px', fontSize: '12px' }}>
               {getInitials(userName)}
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#f9fafb', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {userName || 'Usuário'}
               </div>
-              <div style={{ fontSize: '11px', color: '#6b7280', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {userEmail}
               </div>
             </div>
@@ -161,11 +170,11 @@ export default function Sidebar({ userName, userEmail }: SidebarProps) {
             onClick={() => signOut({ callbackUrl: '/login' })}
             style={{
               width: '100%', display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 14px', borderRadius: '10px',
-              border: 'none', background: 'none', color: '#6b7280', fontSize: '13px', fontWeight: 500, cursor: 'pointer',
+              border: 'none', background: 'none', color: 'var(--color-text-muted)', fontSize: '13px', fontWeight: 500, cursor: 'pointer',
               transition: 'all 0.2s ease',
             }}
             onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.08)'; e.currentTarget.style.color = '#ef4444' }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#6b7280' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = 'var(--color-text-muted)' }}
           >
             <LogOut size={16} /> Sair
           </button>

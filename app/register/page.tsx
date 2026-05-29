@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { toast } from 'sonner'
-import { Eye, EyeOff, Zap } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
 import { signIn } from 'next-auth/react'
 
 export default function RegisterPage() {
@@ -56,10 +57,10 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-gradient-dark flex items-center justify-center p-8">
       <div style={{ position: 'fixed', top: '20%', right: '10%', width: '400px', height: '400px',
-        background: 'radial-gradient(circle, rgba(132,204,22,0.06) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(90,0,255,0.15) 0%, transparent 70%)',
         borderRadius: '50%', pointerEvents: 'none' }} />
       <div style={{ position: 'fixed', bottom: '15%', left: '5%', width: '300px', height: '300px',
-        background: 'radial-gradient(circle, rgba(132,204,22,0.04) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(0,194,255,0.1) 0%, transparent 70%)',
         borderRadius: '50%', pointerEvents: 'none' }} />
 
       <div className="w-full max-w-md">
@@ -67,32 +68,39 @@ export default function RegisterPage() {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
             <div style={{
               width: '44px', height: '44px',
-              background: 'linear-gradient(135deg, #84cc16, #65a30d)',
-              borderRadius: '12px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
+              filter: 'drop-shadow(0 0 12px rgba(123,44,255,0.6))',
             }}>
-              <Zap size={24} color="#0b0f17" fill="#0b0f17" />
+              <Image 
+                src="/logo.png" 
+                alt="Foco 100Limite Logo" 
+                width={44} 
+                height={44} 
+                style={{ objectFit: 'contain', width: 'auto', height: 'auto' }} 
+                priority 
+                unoptimized 
+              />
             </div>
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: '20px', fontWeight: 800, color: '#f9fafb' }}>FOCO</div>
-              <div style={{ fontSize: '11px', fontWeight: 700, color: '#84cc16', letterSpacing: '2px', marginTop: '-4px' }}>100LIMITE</div>
+              <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--color-text-primary)' }}>FOCO</div>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--color-cyan-light)', letterSpacing: '2px', marginTop: '-4px' }}>100LIMITE</div>
             </div>
           </div>
         </div>
 
         <div className="glass-card" style={{ padding: '40px' }}>
           <div style={{ marginBottom: '28px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 800, color: '#f9fafb', marginBottom: '8px' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '8px' }}>
               Crie sua conta gratuita
             </h2>
-            <p style={{ color: '#9ca3af', fontSize: '14px' }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>
               Comece a medir seu progresso agora mesmo
             </p>
           </div>
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#d1d5db', marginBottom: '8px' }}>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: '8px' }}>
                 Nome completo
               </label>
               <input
@@ -107,7 +115,7 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#d1d5db', marginBottom: '8px' }}>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: '8px' }}>
                 Email
               </label>
               <input
@@ -122,7 +130,7 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#d1d5db', marginBottom: '8px' }}>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: '8px' }}>
                 Senha
               </label>
               <div style={{ position: 'relative' }}>
@@ -142,7 +150,7 @@ export default function RegisterPage() {
                   onClick={() => setShowPassword(!showPassword)}
                   style={{
                     position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
-                    background: 'none', border: 'none', cursor: 'pointer', color: '#6b7280', padding: '4px',
+                    background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', padding: '4px',
                   }}
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -161,16 +169,16 @@ export default function RegisterPage() {
             </button>
           </form>
 
-          <div style={{ marginTop: '24px', padding: '16px', background: 'rgba(132,204,22,0.06)', borderRadius: '10px', border: '1px solid rgba(132,204,22,0.12)' }}>
-            <p style={{ fontSize: '12px', color: '#84cc16', textAlign: 'center' }}>
+          <div style={{ marginTop: '24px', padding: '16px', background: 'rgba(90, 0, 255, 0.1)', borderRadius: '10px', border: '1px solid rgba(123, 44, 255, 0.2)' }}>
+            <p style={{ fontSize: '12px', color: 'var(--color-purple-light)', textAlign: 'center' }}>
               ✨ 100% gratuito • Sem cartão de crédito • Sem limites
             </p>
           </div>
 
           <div style={{ marginTop: '20px', textAlign: 'center' }}>
-            <p style={{ color: '#6b7280', fontSize: '14px' }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>
               Já tem uma conta?{' '}
-              <Link href="/login" style={{ color: '#84cc16', fontWeight: 600, textDecoration: 'none' }}>
+              <Link href="/login" style={{ color: 'var(--color-cyan-light)', fontWeight: 600, textDecoration: 'none' }}>
                 Fazer login
               </Link>
             </p>

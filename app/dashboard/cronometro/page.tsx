@@ -164,13 +164,13 @@ export default function CronometroPage() {
   const circ = 2 * Math.PI * r
   const dash = (circleProgress / 100) * circ
 
-  const phaseColor = pomodoroPhase === 'focus' ? '#84cc16' : '#06b6d4'
+  const phaseColor = pomodoroPhase === 'focus' ? '#00C2FF' : '#06b6d4'
 
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
       <div style={{ marginBottom: '28px' }}>
-        <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#f9fafb', marginBottom: '6px' }}>Cronômetro</h1>
-        <p style={{ color: '#9ca3af', fontSize: '14px' }}>Meça seu tempo de foco com precisão</p>
+        <h1 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '6px' }}>Cronômetro</h1>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>Meça seu tempo de foco com precisão</p>
       </div>
 
       <div className="grid-cols-responsive-main" style={{ gap: '24px' }}>
@@ -178,7 +178,7 @@ export default function CronometroPage() {
         <div className="glass-card" style={{ padding: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {/* Mode selector */}
           <div style={{ display: 'flex', gap: '4px', marginBottom: '32px', padding: '4px',
-            background: 'rgba(255,255,255,0.05)', borderRadius: '12px' }}>
+            background: 'var(--color-bg-card)', borderRadius: '12px' }}>
             {[
               { key: 'stopwatch', label: 'Cronômetro', icon: Timer },
               { key: 'pomodoro', label: 'Pomodoro', icon: Coffee },
@@ -186,8 +186,8 @@ export default function CronometroPage() {
               <button key={key} onClick={() => { if (!running) setMode(key as Mode) }}
                 style={{
                   padding: '8px 20px', borderRadius: '9px', border: 'none', cursor: running ? 'not-allowed' : 'pointer',
-                  background: mode === key ? 'rgba(132,204,22,0.2)' : 'none',
-                  color: mode === key ? '#84cc16' : '#9ca3af',
+                  background: mode === key ? 'rgba(0,194,255,0.2)' : 'none',
+                  color: mode === key ? '#00C2FF' : 'var(--color-text-muted)',
                   fontSize: '14px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px',
                   transition: 'all 0.2s',
                 }}>
@@ -200,14 +200,14 @@ export default function CronometroPage() {
           {/* Pomodoro phase indicator */}
           {mode === 'pomodoro' && (
             <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
-              <span className="badge" style={{ background: pomodoroPhase === 'focus' ? 'rgba(132,204,22,0.15)' : 'rgba(255,255,255,0.05)',
-                color: pomodoroPhase === 'focus' ? '#84cc16' : '#6b7280',
-                border: `1px solid ${pomodoroPhase === 'focus' ? 'rgba(132,204,22,0.3)' : 'rgba(255,255,255,0.08)'}` }}>
+              <span className="badge" style={{ background: pomodoroPhase === 'focus' ? 'rgba(0,194,255,0.15)' : 'var(--color-bg-card)',
+                color: pomodoroPhase === 'focus' ? '#00C2FF' : 'var(--color-text-muted)',
+                border: `1px solid ${pomodoroPhase === 'focus' ? 'rgba(0,194,255,0.3)' : 'var(--color-border)'}` }}>
                 🎯 Foco
               </span>
-              <span className="badge" style={{ background: pomodoroPhase !== 'focus' ? 'rgba(6,182,212,0.15)' : 'rgba(255,255,255,0.05)',
-                color: pomodoroPhase !== 'focus' ? '#06b6d4' : '#6b7280',
-                border: `1px solid ${pomodoroPhase !== 'focus' ? 'rgba(6,182,212,0.3)' : 'rgba(255,255,255,0.08)'}` }}>
+              <span className="badge" style={{ background: pomodoroPhase !== 'focus' ? 'rgba(6,182,212,0.15)' : 'var(--color-bg-card)',
+                color: pomodoroPhase !== 'focus' ? '#06b6d4' : 'var(--color-text-muted)',
+                border: `1px solid ${pomodoroPhase !== 'focus' ? 'rgba(6,182,212,0.3)' : 'var(--color-border)'}` }}>
                 ☕ Pausa
               </span>
               <span className="badge badge-amber">Ciclos: {pomodoroCount}</span>
@@ -217,12 +217,12 @@ export default function CronometroPage() {
           {/* Circular timer */}
           <div style={{ position: 'relative', width: '260px', height: '260px', marginBottom: '32px' }}>
             <svg width="260" height="260" style={{ transform: 'rotate(-90deg)' }}>
-              <circle cx="130" cy="130" r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="8" />
+              <circle cx="130" cy="130" r={r} fill="none" stroke="var(--color-border)" strokeWidth="8" />
               <circle cx="130" cy="130" r={r} fill="none"
-                stroke={mode === 'pomodoro' ? phaseColor : '#84cc16'}
+                stroke={mode === 'pomodoro' ? phaseColor : '#00C2FF'}
                 strokeWidth="8" strokeLinecap="round"
                 strokeDasharray={`${dash} ${circ}`}
-                style={{ transition: 'stroke-dasharray 0.5s ease', filter: `drop-shadow(0 0 8px ${mode === 'pomodoro' ? phaseColor : '#84cc16'}60)` }}
+                style={{ transition: 'stroke-dasharray 0.5s ease', filter: `drop-shadow(0 0 8px ${mode === 'pomodoro' ? phaseColor : '#00C2FF'}60)` }}
               />
             </svg>
             <div style={{
@@ -231,19 +231,19 @@ export default function CronometroPage() {
             }}>
               <div style={{
                 fontSize: '52px', fontWeight: 800, letterSpacing: '-2px',
-                color: running ? (mode === 'pomodoro' ? phaseColor : '#84cc16') : '#f9fafb',
+                color: running ? (mode === 'pomodoro' ? phaseColor : '#00C2FF') : 'var(--color-text-primary)',
                 fontVariantNumeric: 'tabular-nums',
                 transition: 'color 0.3s',
               }}>
                 {h > 0 ? `${pad(h)}:` : ''}{pad(m)}:{pad(s)}
               </div>
               {mode === 'stopwatch' && (
-                <div style={{ fontSize: '12px', color: '#6b7280', marginTop: '4px' }}>
+                <div style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginTop: '4px' }}>
                   {(elapsed / 3600).toFixed(2)}h
                 </div>
               )}
               {mode === 'pomodoro' && (
-                <div style={{ fontSize: '12px', color: pomodoroPhase === 'focus' ? '#84cc16' : '#06b6d4', marginTop: '4px', fontWeight: 600 }}>
+                <div style={{ fontSize: '12px', color: pomodoroPhase === 'focus' ? '#00C2FF' : '#06b6d4', marginTop: '4px', fontWeight: 600 }}>
                   {pomodoroPhase === 'focus' ? 'FOCO TOTAL' : pomodoroPhase === 'short' ? 'PAUSA CURTA' : 'PAUSA LONGA'}
                 </div>
               )}
@@ -253,8 +253,8 @@ export default function CronometroPage() {
           {/* Controls */}
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '24px' }}>
             <button onClick={handleReset}
-              style={{ width: '48px', height: '48px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.1)',
-                background: 'rgba(255,255,255,0.05)', color: '#9ca3af', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              style={{ width: '48px', height: '48px', borderRadius: '50%', border: '1px solid var(--color-border)',
+                background: 'var(--color-bg-card)', color: 'var(--color-text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transition: 'all 0.2s' }}
               id="timer-reset">
               <RotateCcw size={18} />
@@ -267,12 +267,12 @@ export default function CronometroPage() {
                 width: '72px', height: '72px', borderRadius: '50%', border: 'none', cursor: 'pointer',
                 background: running
                   ? 'rgba(239,68,68,0.15)'
-                  : 'linear-gradient(135deg, #84cc16, #65a30d)',
-                color: running ? '#ef4444' : '#0b0f17',
+                  : 'linear-gradient(135deg, #00C2FF, #7B2CFF)',
+                color: running ? '#ef4444' : 'var(--color-bg-primary)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 boxShadow: running
                   ? '0 0 24px rgba(239,68,68,0.3)'
-                  : '0 0 24px rgba(132,204,22,0.4)',
+                  : '0 0 24px rgba(0,194,255,0.4)',
                 transition: 'all 0.2s',
               }}
               id="timer-toggle">
@@ -280,8 +280,8 @@ export default function CronometroPage() {
             </button>
 
             <button onClick={handleSave}
-              style={{ width: '48px', height: '48px', borderRadius: '50%', border: '1px solid rgba(132,204,22,0.2)',
-                background: 'rgba(132,204,22,0.08)', color: '#84cc16', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              style={{ width: '48px', height: '48px', borderRadius: '50%', border: '1px solid rgba(0,194,255,0.2)',
+                background: 'rgba(0,194,255,0.08)', color: '#00C2FF', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transition: 'all 0.2s' }}
               id="timer-save">
               <Save size={18} />
@@ -298,8 +298,8 @@ export default function CronometroPage() {
           {/* Subject */}
           <div className="glass-card" style={{ padding: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-              <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#f9fafb' }}>Matéria</h3>
-              <button onClick={() => setIsSubjectManagerOpen(true)} style={{ background: 'none', border: 'none', color: '#84cc16', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', fontWeight: 600 }}>
+              <h3 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--color-text-primary)' }}>Matéria</h3>
+              <button onClick={() => setIsSubjectManagerOpen(true)} style={{ background: 'none', border: 'none', color: '#00C2FF', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', fontWeight: 600 }}>
                 <Settings size={14} /> Gerenciar
               </button>
             </div>
@@ -312,14 +312,14 @@ export default function CronometroPage() {
           {/* Pomodoro Settings */}
           {mode === 'pomodoro' && (
             <div className="glass-card" style={{ padding: '20px' }}>
-              <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#f9fafb', marginBottom: '14px' }}>Configurar Pomodoro</h3>
+              <h3 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: '14px' }}>Configurar Pomodoro</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {[
                   { label: 'Foco (min)', value: pomodoroFocusMin, setter: setPomodoroFocusMin },
                   { label: 'Pausa curta (min)', value: pomodoroShortMin, setter: setPomodoroShortMin },
                 ].map(({ label, value, setter }) => (
                   <div key={label}>
-                    <div style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '4px' }}>{label}</div>
+                    <div style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '4px' }}>{label}</div>
                     <input type="number" className="input-glass" value={value}
                       onChange={e => { if (!running) setter(Math.max(1, Math.min(60, parseInt(e.target.value) || 1))) }}
                       min={1} max={60} />
@@ -327,7 +327,7 @@ export default function CronometroPage() {
                 ))}
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                   <input type="checkbox" checked={soundEnabled} onChange={e => setSoundEnabled(e.target.checked)} />
-                  <span style={{ fontSize: '13px', color: '#9ca3af' }}>Som ao completar ciclo</span>
+                  <span style={{ fontSize: '13px', color: 'var(--color-text-muted)' }}>Som ao completar ciclo</span>
                 </label>
               </div>
             </div>
@@ -335,7 +335,7 @@ export default function CronometroPage() {
 
           {/* Instructions */}
           <div className="glass-card" style={{ padding: '20px' }}>
-            <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#f9fafb', marginBottom: '12px' }}>Como usar</h3>
+            <h3 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: '12px' }}>Como usar</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {[
                 '1. Selecione a matéria',
@@ -343,7 +343,7 @@ export default function CronometroPage() {
                 '3. Estude com foco total',
                 '4. Clique em 💾 para salvar',
               ].map(t => (
-                <p key={t} style={{ fontSize: '12px', color: '#6b7280' }}>{t}</p>
+                <p key={t} style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>{t}</p>
               ))}
             </div>
           </div>

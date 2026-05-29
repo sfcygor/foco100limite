@@ -14,18 +14,18 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#0b0f17' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--color-bg-primary)' }}>
       {/* Background orbs */}
       <div style={{
         position: 'fixed', top: '10%', left: '30%',
         width: '600px', height: '600px',
-        background: 'radial-gradient(circle, rgba(132,204,22,0.04) 0%, transparent 60%)',
+        background: 'radial-gradient(circle, rgba(0,194,255,0.04) 0%, transparent 60%)',
         borderRadius: '50%', pointerEvents: 'none', zIndex: 0,
       }} />
       <div style={{
         position: 'fixed', bottom: '5%', right: '10%',
         width: '400px', height: '400px',
-        background: 'radial-gradient(circle, rgba(132,204,22,0.03) 0%, transparent 60%)',
+        background: 'radial-gradient(circle, rgba(0,194,255,0.03) 0%, transparent 60%)',
         borderRadius: '50%', pointerEvents: 'none', zIndex: 0,
       }} />
 

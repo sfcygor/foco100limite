@@ -28,7 +28,7 @@ interface Insight {
   message: string
 }
 
-function MetricCard({ icon: Icon, label, value, sub, color = '#84cc16', progress }: any) {
+function MetricCard({ icon: Icon, label, value, sub, color = '#00C2FF', progress }: any) {
   return (
     <motion.div whileHover={{ y: -4 }} className="metric-card">
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '16px' }}>
@@ -42,11 +42,11 @@ function MetricCard({ icon: Icon, label, value, sub, color = '#84cc16', progress
           <span style={{ fontSize: '12px', color, fontWeight: 700 }}>{progress}%</span>
         )}
       </div>
-      <div style={{ fontSize: '28px', fontWeight: 800, color: '#f9fafb', letterSpacing: '-0.5px', marginBottom: '4px' }}>
+      <div style={{ fontSize: '28px', fontWeight: 800, color: 'var(--color-text-primary)', letterSpacing: '-0.5px', marginBottom: '4px' }}>
         {value}
       </div>
-      <div style={{ fontSize: '13px', color: '#9ca3af', fontWeight: 500 }}>{label}</div>
-      {sub && <div style={{ fontSize: '11px', color: '#6b7280', marginTop: '6px' }}>{sub}</div>}
+      <div style={{ fontSize: '13px', color: 'var(--color-text-muted)', fontWeight: 500 }}>{label}</div>
+      {sub && <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', marginTop: '6px' }}>{sub}</div>}
       {progress !== undefined && (
         <div className="progress-bar" style={{ marginTop: '12px' }}>
           <div className="progress-fill" style={{ width: `${Math.min(progress, 100)}%`, background: color }} />
@@ -60,11 +60,11 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
       <div style={{
-        background: 'rgba(17,24,39,0.95)', border: '1px solid rgba(132,204,22,0.2)',
+        background: 'rgba(17,24,39,0.95)', border: '1px solid rgba(123,44,255,0.2)',
         borderRadius: '10px', padding: '10px 14px', backdropFilter: 'blur(12px)',
       }}>
-        <p style={{ color: '#9ca3af', fontSize: '12px', marginBottom: '4px' }}>{label}</p>
-        <p style={{ color: '#84cc16', fontSize: '15px', fontWeight: 700 }}>{payload[0].value}h</p>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '12px', marginBottom: '4px' }}>{label}</p>
+        <p style={{ color: '#00C2FF', fontSize: '15px', fontWeight: 700 }}>{payload[0].value}h</p>
       </div>
     )
   }
@@ -122,10 +122,10 @@ export default function DashboardClient({ userId, userName }: { userId: string; 
       {/* Header */}
       <div style={{ marginBottom: '32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
-          <h1 style={{ fontSize: '26px', fontWeight: 800, color: '#f9fafb', marginBottom: '6px' }}>
+          <h1 style={{ fontSize: '26px', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '6px' }}>
             {getGreeting()}, {userName?.split(' ')[0] || 'Concurseiro'} 👋
           </h1>
-          <p style={{ color: '#6b7280', fontSize: '14px' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>
             {new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}
           </p>
         </div>
@@ -133,7 +133,7 @@ export default function DashboardClient({ userId, userName }: { userId: string; 
           <Flame size={24} color="#f59e0b" style={{ filter: 'drop-shadow(0 0 8px rgba(245,158,11,0.6))' }} />
           <div>
             <div style={{ fontSize: '20px', fontWeight: 800, color: '#f59e0b', lineHeight: 1 }}>{stats?.year.streak || 0}</div>
-            <div style={{ fontSize: '11px', color: '#9ca3af', fontWeight: 600 }}>dias seguidos</div>
+            <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 600 }}>dias seguidos</div>
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@ export default function DashboardClient({ userId, userName }: { userId: string; 
               success: { bg: 'rgba(16,185,129,0.1)', border: 'rgba(16,185,129,0.2)', text: '#10b981' },
               warning: { bg: 'rgba(245,158,11,0.1)', border: 'rgba(245,158,11,0.2)', text: '#f59e0b' },
               danger: { bg: 'rgba(239,68,68,0.1)', border: 'rgba(239,68,68,0.2)', text: '#ef4444' },
-              info: { bg: 'rgba(132,204,22,0.1)', border: 'rgba(132,204,22,0.2)', text: '#84cc16' }
+              info: { bg: 'rgba(0,194,255,0.1)', border: 'rgba(0,194,255,0.2)', text: '#00C2FF' }
             }
             const c = colors[insight.type]
             
@@ -161,7 +161,7 @@ export default function DashboardClient({ userId, userName }: { userId: string; 
                 <div style={{ color: c.text, marginTop: '2px' }}><Icon size={18} /></div>
                 <div>
                   <div style={{ fontSize: '13px', fontWeight: 600, color: c.text }}>Insight Inteligente</div>
-                  <div style={{ fontSize: '12px', color: '#d1d5db', marginTop: '2px', lineHeight: 1.4 }}>{insight.message}</div>
+                  <div style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginTop: '2px', lineHeight: 1.4 }}>{insight.message}</div>
                 </div>
               </motion.div>
             )
@@ -186,21 +186,21 @@ export default function DashboardClient({ userId, userName }: { userId: string; 
         {/* Bar chart */}
         <div className="glass-card" style={{ padding: '24px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-            <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#f9fafb' }}>Horas por Dia</h3>
+            <h3 style={{ fontSize: '15px', fontWeight: 700, color: 'var(--color-text-primary)' }}>Horas por Dia</h3>
             <span className="badge badge-neon">Últimos 7 dias</span>
           </div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={chartData} barSize={28}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-              <XAxis dataKey="day" tick={{ fill: '#6b7280', fontSize: 12 }} axisLine={false} tickLine={false} dy={10} />
-              <YAxis tick={{ fill: '#6b7280', fontSize: 12 }} axisLine={false} tickLine={false} dx={-10} />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(132,204,22,0.05)' }} />
-              <ReferenceLine y={weeklyGoal / 7} stroke="#f59e0b" strokeDasharray="4 4" strokeWidth={1.5} />
-              <Bar dataKey="hours" fill="#84cc16" radius={[6, 6, 0, 0]} style={{ filter: 'drop-shadow(0 0 8px rgba(132,204,22,0.3))' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-bg-card)" vertical={false} />
+              <XAxis dataKey="day" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} axisLine={false} tickLine={false} dy={10} />
+              <YAxis tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} axisLine={false} tickLine={false} dx={-10} />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(123,44,255,0.05)' }} />
+              <ReferenceLine y={weeklyGoal / 7} stroke="#FFC300" strokeDasharray="4 4" strokeWidth={1.5} />
+              <Bar dataKey="hours" fill="#7B2CFF" radius={[6, 6, 0, 0]} style={{ filter: 'drop-shadow(0 0 8px rgba(123,44,255,0.3))' }} />
             </BarChart>
           </ResponsiveContainer>
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
-            <p style={{ fontSize: '12px', color: '#6b7280', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <p style={{ fontSize: '12px', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{ width: '16px', height: '2px', background: '#f59e0b', display: 'inline-block' }} /> 
               Meta diária ideal ({(weeklyGoal / 7).toFixed(1)}h)
             </p>
@@ -211,12 +211,12 @@ export default function DashboardClient({ userId, userName }: { userId: string; 
         <div className="glass-card" style={{ padding: '24px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
             <BookOpen size={16} color="#06b6d4" />
-            <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#f9fafb' }}>Top Matérias</h3>
+            <h3 style={{ fontSize: '15px', fontWeight: 700, color: 'var(--color-text-primary)' }}>Top Matérias</h3>
           </div>
           {(!stats?.subjects || stats.subjects.length === 0) ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '16px', background: 'rgba(255,255,255,0.03)', borderRadius: '10px' }}>
-              <AlertCircle size={16} color="#6b7280" />
-              <span style={{ fontSize: '13px', color: '#6b7280' }}>Nenhum estudo registrado ainda.</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '16px', background: 'var(--color-bg-card)', borderRadius: '10px' }}>
+              <AlertCircle size={16} color="var(--color-text-muted)" />
+              <span style={{ fontSize: '13px', color: 'var(--color-text-muted)' }}>Nenhum estudo registrado ainda.</span>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -227,13 +227,13 @@ export default function DashboardClient({ userId, userName }: { userId: string; 
                   <div key={s.name}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <span style={{ fontSize: '11px', fontWeight: 800, color: '#6b7280', width: '16px' }}>{i + 1}</span>
+                        <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--color-text-muted)', width: '16px' }}>{i + 1}</span>
                         <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: s.color, boxShadow: `0 0 8px ${s.color}80` }} />
                         <span style={{ fontSize: '13px', fontWeight: 600, color: '#e5e7eb' }}>{s.name}</span>
                       </div>
-                      <span style={{ fontSize: '12px', fontWeight: 700, color: '#9ca3af' }}>{secondsToHours(s.duration)}h</span>
+                      <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-muted)' }}>{secondsToHours(s.duration)}h</span>
                     </div>
-                    <div className="progress-bar" style={{ height: '6px', background: 'rgba(255,255,255,0.05)' }}>
+                    <div className="progress-bar" style={{ height: '6px', background: 'var(--color-bg-card)' }}>
                       <motion.div initial={{ width: 0 }} animate={{ width: `${percent}%` }} transition={{ duration: 1, ease: 'easeOut' }} style={{ height: '100%', background: s.color, borderRadius: '3px' }} />
                     </div>
                   </div>

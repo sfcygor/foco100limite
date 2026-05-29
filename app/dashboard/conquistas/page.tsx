@@ -54,9 +54,9 @@ export default function ConquistasPage() {
       <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
           <Medal size={22} color="#f59e0b" />
-          <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#f9fafb' }}>Conquistas</h1>
+          <h1 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--color-text-primary)' }}>Conquistas</h1>
         </div>
-        <p style={{ color: '#9ca3af', fontSize: '14px' }}>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>
           {unlocked.length} de {achievements.length} conquistas desbloqueadas
         </p>
       </div>
@@ -64,8 +64,8 @@ export default function ConquistasPage() {
       {/* Progress overview */}
       <div className="glass-card" style={{ padding: '20px 24px', marginBottom: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-          <span style={{ fontSize: '14px', fontWeight: 600, color: '#f9fafb' }}>Progresso Geral</span>
-          <span style={{ fontSize: '13px', color: '#84cc16', fontWeight: 700 }}>
+          <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--color-text-primary)' }}>Progresso Geral</span>
+          <span style={{ fontSize: '13px', color: '#00C2FF', fontWeight: 700 }}>
             {achievements.length > 0 ? Math.round((unlocked.length / achievements.length) * 100) : 0}%
           </span>
         </div>
@@ -83,14 +83,14 @@ export default function ConquistasPage() {
       ) : achievements.length === 0 ? (
         <div className="glass-card" style={{ padding: '48px', textAlign: 'center' }}>
           <Medal size={48} color="#374151" style={{ margin: '0 auto 16px' }} />
-          <p style={{ color: '#6b7280' }}>Nenhuma conquista disponível. Comece a estudar!</p>
+          <p style={{ color: 'var(--color-text-muted)' }}>Nenhuma conquista disponível. Comece a estudar!</p>
         </div>
       ) : (
         <>
           {/* Unlocked */}
           {unlocked.length > 0 && (
             <div style={{ marginBottom: '28px' }}>
-              <h2 style={{ fontSize: '16px', fontWeight: 700, color: '#84cc16', marginBottom: '14px' }}>
+              <h2 style={{ fontSize: '16px', fontWeight: 700, color: '#00C2FF', marginBottom: '14px' }}>
                 ✨ Desbloqueadas ({unlocked.length})
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '14px' }}>
@@ -100,26 +100,26 @@ export default function ConquistasPage() {
                     className="achievement-unlocked"
                     style={{
                       padding: '22px 18px',
-                      background: 'linear-gradient(135deg, rgba(132,204,22,0.1), rgba(101,163,13,0.05))',
-                      border: '1px solid rgba(132,204,22,0.25)',
+                      background: 'linear-gradient(135deg, rgba(0,194,255,0.1), rgba(101,163,13,0.05))',
+                      border: '1px solid rgba(0,194,255,0.25)',
                       borderRadius: '16px',
                       textAlign: 'center',
                       transition: 'all 0.3s',
                     }}
                   >
                     <div style={{ fontSize: '40px', marginBottom: '10px' }}>{a.achievement.icon}</div>
-                    <div style={{ fontSize: '14px', fontWeight: 700, color: '#84cc16', marginBottom: '4px' }}>
+                    <div style={{ fontSize: '14px', fontWeight: 700, color: '#00C2FF', marginBottom: '4px' }}>
                       {a.achievement.title}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#9ca3af', lineHeight: 1.4, marginBottom: '10px' }}>
+                    <div style={{ fontSize: '12px', color: 'var(--color-text-muted)', lineHeight: 1.4, marginBottom: '10px' }}>
                       {a.achievement.description}
                     </div>
-                    <div style={{ fontSize: '10px', color: '#6b7280' }}>
+                    <div style={{ fontSize: '10px', color: 'var(--color-text-muted)' }}>
                       {a.unlockedAt ? new Date(a.unlockedAt).toLocaleDateString('pt-BR') : ''}
                     </div>
                     <div style={{ marginTop: '8px', padding: '3px 10px',
-                      background: 'rgba(132,204,22,0.15)', borderRadius: '999px', display: 'inline-block' }}>
-                      <span style={{ fontSize: '11px', color: '#84cc16', fontWeight: 700 }}>✓ Desbloqueada</span>
+                      background: 'rgba(0,194,255,0.15)', borderRadius: '999px', display: 'inline-block' }}>
+                      <span style={{ fontSize: '11px', color: '#00C2FF', fontWeight: 700 }}>✓ Desbloqueada</span>
                     </div>
                   </div>
                 ))}
@@ -130,7 +130,7 @@ export default function ConquistasPage() {
           {/* Locked */}
           {locked.length > 0 && (
             <div>
-              <h2 style={{ fontSize: '16px', fontWeight: 700, color: '#6b7280', marginBottom: '14px' }}>
+              <h2 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '14px' }}>
                 🔒 Bloqueadas ({locked.length})
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '14px' }}>
@@ -141,8 +141,8 @@ export default function ConquistasPage() {
                       key={a.id}
                       style={{
                         padding: '22px 18px',
-                        background: 'rgba(255,255,255,0.03)',
-                        border: '1px solid rgba(255,255,255,0.06)',
+                        background: 'var(--color-bg-card)',
+                        border: '1px solid var(--color-border)',
                         borderRadius: '16px',
                         textAlign: 'center',
                         opacity: 0.7,
@@ -151,7 +151,7 @@ export default function ConquistasPage() {
                       <div style={{ fontSize: '40px', marginBottom: '10px', filter: 'grayscale(100%)' }}>
                         {a.achievement.icon}
                       </div>
-                      <div style={{ fontSize: '14px', fontWeight: 700, color: '#6b7280', marginBottom: '4px' }}>
+                      <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                         {a.achievement.title}
                       </div>
                       <div style={{ fontSize: '12px', color: '#4b5563', lineHeight: 1.4, marginBottom: '12px' }}>

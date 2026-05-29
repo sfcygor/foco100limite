@@ -135,8 +135,8 @@ export default function PerfilPage() {
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
       <div style={{ marginBottom: '28px' }}>
-        <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#f9fafb', marginBottom: '6px' }}>Meu Perfil</h1>
-        <p style={{ color: '#9ca3af', fontSize: '14px' }}>Gerencie suas informações e configurações</p>
+        <h1 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '6px' }}>Meu Perfil</h1>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>Gerencie suas informações e configurações</p>
       </div>
 
       <div className="grid-cols-responsive-main">
@@ -149,11 +149,11 @@ export default function PerfilPage() {
               <div className="group" style={{ position: 'relative' }}>
                 <div style={{
                   width: '80px', height: '80px',
-                  background: 'linear-gradient(135deg, #84cc16, #65a30d)',
+                  background: 'linear-gradient(135deg, #7B2CFF, #00C2FF)',
                   borderRadius: '50%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '28px', fontWeight: 800, color: '#0b0f17',
-                  boxShadow: '0 0 24px rgba(132,204,22,0.3)',
+                  fontSize: '28px', fontWeight: 800, color: 'var(--color-bg-primary)',
+                  boxShadow: '0 0 24px rgba(123,44,255,0.4)',
                   overflow: 'hidden',
                   cursor: 'pointer'
                 }} onClick={() => fileInputRef.current?.click()}>
@@ -169,7 +169,7 @@ export default function PerfilPage() {
                 </div>
                 
                 <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
-                  <button onClick={() => fileInputRef.current?.click()} style={{ fontSize: '12px', color: '#84cc16', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
+                  <button onClick={() => fileInputRef.current?.click()} style={{ fontSize: '12px', color: '#00C2FF', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
                     <Upload size={14} /> Alterar
                   </button>
                   {profile.image && (
@@ -182,9 +182,9 @@ export default function PerfilPage() {
               </div>
 
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: '20px', fontWeight: 800, color: '#f9fafb' }}>{profile.name || 'Usuário'}</div>
-                <div style={{ fontSize: '14px', color: '#9ca3af' }}>{profile.email}</div>
-                <div style={{ fontSize: '12px', color: '#6b7280', marginTop: '4px' }}>
+                <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--color-text-primary)' }}>{profile.name || 'Usuário'}</div>
+                <div style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>{profile.email}</div>
+                <div style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginTop: '4px' }}>
                   Membro desde {new Date(profile.createdAt).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}
                 </div>
               </div>
@@ -192,34 +192,34 @@ export default function PerfilPage() {
 
             <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#d1d5db', marginBottom: '8px' }}>Nome</label>
+                <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: '8px' }}>Nome</label>
                 <input type="text" className="input-glass" value={name} onChange={e => setName(e.target.value)} id="profile-name" />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#d1d5db', marginBottom: '8px' }}>
+                <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: '8px' }}>
                   Meta semanal de horas
                 </label>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <input type="range" min={5} max={80} step={5} value={weeklyGoal}
                     onChange={e => setWeeklyGoal(parseInt(e.target.value))}
-                    style={{ flex: 1, accentColor: '#84cc16' }} />
-                  <span style={{ fontSize: '16px', fontWeight: 800, color: '#84cc16', minWidth: '40px' }}>{weeklyGoal}h</span>
+                    style={{ flex: 1, accentColor: '#00C2FF' }} />
+                  <span style={{ fontSize: '16px', fontWeight: 800, color: '#00C2FF', minWidth: '40px' }}>{weeklyGoal}h</span>
                 </div>
               </div>
 
               <div className="divider" />
 
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#f9fafb', marginBottom: '-4px' }}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: '-4px' }}>
                 Alterar senha (opcional)
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: '#9ca3af', marginBottom: '6px' }}>Senha atual</label>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '6px' }}>Senha atual</label>
                 <input type="password" className="input-glass" value={currentPassword}
                   onChange={e => setCurrentPassword(e.target.value)} placeholder="Senha atual" />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: '#9ca3af', marginBottom: '6px' }}>Nova senha</label>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '6px' }}>Nova senha</label>
                 <input type="password" className="input-glass" value={newPassword}
                   onChange={e => setNewPassword(e.target.value)} placeholder="Nova senha (mínimo 6 caracteres)" />
               </div>
@@ -240,7 +240,7 @@ export default function PerfilPage() {
               </div>
               <div>
                 <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#ef4444' }}>Zerar Estatísticas</h3>
-                <p style={{ fontSize: '13px', color: '#9ca3af' }}>Esta ação apagará todo o seu progresso, sessões e conquistas.</p>
+                <p style={{ fontSize: '13px', color: 'var(--color-text-muted)' }}>Esta ação apagará todo o seu progresso, sessões e conquistas.</p>
               </div>
             </div>
             
@@ -263,7 +263,7 @@ export default function PerfilPage() {
         {/* Stats sidebar */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {[
-            { icon: Clock, label: 'Horas totais', value: `${totalHours}h`, color: '#84cc16' },
+            { icon: Clock, label: 'Horas totais', value: `${totalHours}h`, color: '#00C2FF' },
             { icon: Target, label: 'Questões respondidas', value: stats?.total.questions || 0, color: '#f59e0b' },
             { icon: Flame, label: 'Sequência atual', value: `${stats?.year.streak || 0} dias`, color: '#f97316' },
             { icon: User, label: 'Dias ativos no ano', value: stats?.year.daysStudied || 0, color: '#06b6d4' },
@@ -277,7 +277,7 @@ export default function PerfilPage() {
               </div>
               <div>
                 <div style={{ fontSize: '18px', fontWeight: 800, color }}>{value}</div>
-                <div style={{ fontSize: '12px', color: '#9ca3af' }}>{label}</div>
+                <div style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>{label}</div>
               </div>
             </motion.div>
           ))}
@@ -303,7 +303,7 @@ export default function PerfilPage() {
               className="glass-card"
               style={{ position: 'relative', width: '100%', maxWidth: '400px', padding: '32px', zIndex: 1, border: '1px solid rgba(239, 68, 68, 0.3)' }}
             >
-              <button onClick={() => !resetting && setShowResetModal(false)} style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer' }}>
+              <button onClick={() => !resetting && setShowResetModal(false)} style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'pointer' }}>
                 <X size={20} />
               </button>
               
@@ -311,10 +311,10 @@ export default function PerfilPage() {
                 <AlertTriangle size={28} />
               </div>
 
-              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#f9fafb', marginBottom: '8px' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '8px' }}>
                 Zerar todas as estatísticas?
               </h2>
-              <p style={{ fontSize: '14px', color: '#9ca3af', marginBottom: '32px', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '14px', color: 'var(--color-text-muted)', marginBottom: '32px', lineHeight: 1.5 }}>
                 Esta ação <strong style={{ color: '#ef4444' }}>não poderá ser desfeita</strong>. Todas as suas horas estudadas, questões respondidas, gráficos, rankings e conquistas voltarão a zero.
               </p>
 

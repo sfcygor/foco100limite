@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
   const subject = await prisma.subject.create({
     data: {
       name,
-      color: color || '#84cc16',
+      color: color || '#00C2FF',
       icon: icon || 'BookOpen',
       userId: session.user.id,
     },

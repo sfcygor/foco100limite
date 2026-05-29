@@ -105,8 +105,8 @@ export default function RevisoesPage() {
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
       <div style={{ marginBottom: '28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#f9fafb', marginBottom: '6px' }}>Revisões Agendadas</h1>
-          <p style={{ color: '#9ca3af', fontSize: '14px' }}>Repetição espaçada para nunca mais esquecer o conteúdo.</p>
+          <h1 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '6px' }}>Revisões Agendadas</h1>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>Repetição espaçada para nunca mais esquecer o conteúdo.</p>
         </div>
         <button onClick={() => setShowModal(true)} className="btn-neon" style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px' }}>
           <Plus size={18} /> Nova Revisão
@@ -125,11 +125,11 @@ export default function RevisoesPage() {
             <div style={{ padding: '20px', display: 'flex', justifyContent: 'center' }}><div className="spinner" /></div>
           ) : pending.length === 0 ? (
             <div className="glass-card" style={{ padding: '32px', textAlign: 'center' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(132,204,22,0.1)', color: '#84cc16', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(123,44,255,0.1)', color: '#7B2CFF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <CheckCircle2 size={24} />
               </div>
-              <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#f9fafb' }}>Tudo em dia!</h3>
-              <p style={{ fontSize: '13px', color: '#9ca3af', marginTop: '4px' }}>Você não tem nenhuma revisão pendente.</p>
+              <h3 style={{ fontSize: '15px', fontWeight: 700, color: 'var(--color-text-primary)' }}>Tudo em dia!</h3>
+              <p style={{ fontSize: '13px', color: 'var(--color-text-muted)', marginTop: '4px' }}>Você não tem nenhuma revisão pendente.</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -146,14 +146,14 @@ export default function RevisoesPage() {
                           <span className="badge" style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444' }}>Atrasada</span>
                         )}
                       </div>
-                      <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#f9fafb', marginBottom: '4px' }}>{r.title}</h3>
-                      <p style={{ fontSize: '12px', color: '#6b7280' }}>
+                      <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: '4px' }}>{r.title}</h3>
+                      <p style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>
                         Agendada para {format(new Date(r.nextDate), "dd 'de' MMM", { locale: ptBR })} (Ciclo: {r.completedCount + 1})
                       </p>
                     </div>
                     
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      <button onClick={() => handleComplete(r.id)} style={{ padding: '8px 16px', borderRadius: '8px', background: '#84cc16', color: '#000', fontWeight: 700, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', boxShadow: '0 0 12px rgba(132,204,22,0.3)' }}>
+                      <button onClick={() => handleComplete(r.id)} style={{ padding: '8px 16px', borderRadius: '8px', background: '#00C2FF', color: '#000', fontWeight: 700, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', boxShadow: '0 0 12px rgba(0,194,255,0.3)' }}>
                         <CheckCircle2 size={16} /> Revisado
                       </button>
                       <button onClick={() => handleDelete(r.id)} style={{ padding: '6px', background: 'none', color: '#ef4444', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'center' }}>
@@ -169,27 +169,27 @@ export default function RevisoesPage() {
 
         {/* UPCOMING REVISIONS */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <h2 style={{ fontSize: '16px', fontWeight: 700, color: '#9ca3af', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <h2 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <CalendarDays size={18} /> Próximas Revisões ({upcoming.length})
           </h2>
           
           <div className="glass-card" style={{ padding: '24px' }}>
             {upcoming.length === 0 ? (
-              <p style={{ fontSize: '13px', color: '#6b7280', textAlign: 'center' }}>Nenhuma revisão agendada para o futuro.</p>
+              <p style={{ fontSize: '13px', color: 'var(--color-text-muted)', textAlign: 'center' }}>Nenhuma revisão agendada para o futuro.</p>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {upcoming.slice(0, 10).map(r => (
-                  <div key={r.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div key={r.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '12px', borderBottom: '1px solid var(--color-bg-card)' }}>
                     <div>
-                      <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#d1d5db', marginBottom: '4px' }}>{r.title}</h4>
+                      <h4 style={{ fontSize: '14px', fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: '4px' }}>{r.title}</h4>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <div style={{ width: 8, height: 8, borderRadius: '50%', background: r.subject.color }} />
-                        <span style={{ fontSize: '11px', color: '#9ca3af' }}>{r.subject.name}</span>
+                        <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>{r.subject.name}</span>
                       </div>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: '#f9fafb' }}>{format(new Date(r.nextDate), "dd MMM", { locale: ptBR })}</div>
-                      <div style={{ fontSize: '11px', color: '#6b7280' }}>Daqui a {r.intervalDays} dias</div>
+                      <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>{format(new Date(r.nextDate), "dd MMM", { locale: ptBR })}</div>
+                      <div style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>Daqui a {r.intervalDays} dias</div>
                     </div>
                   </div>
                 ))}
@@ -207,25 +207,25 @@ export default function RevisoesPage() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)' }} onClick={() => setShowModal(false)} />
             
             <motion.div initial={{ scale: 0.95, opacity: 0, y: 10 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0, y: 10 }} className="glass-card" style={{ position: 'relative', width: '100%', maxWidth: '400px', padding: '32px', zIndex: 1 }}>
-              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#f9fafb', marginBottom: '20px' }}>Agendar Revisão</h2>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '20px' }}>Agendar Revisão</h2>
               
               <form onSubmit={handleCreate} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div>
-                  <label style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px', display: 'block' }}>Conteúdo Estudado (Ex: Crase, Leis de Newton)</label>
+                  <label style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '8px', display: 'block' }}>Conteúdo Estudado (Ex: Crase, Leis de Newton)</label>
                   <input autoFocus type="text" className="input-glass" value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Tópico..." />
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px', display: 'block' }}>Matéria</label>
+                  <label style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '8px', display: 'block' }}>Matéria</label>
                   <select className="input-glass" value={newSubject} onChange={e => setNewSubject(e.target.value)}>
                     <option value="">Selecione...</option>
                     {subjects.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
                   </select>
                 </div>
 
-                <div style={{ padding: '12px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <p style={{ fontSize: '12px', color: '#9ca3af', display: 'flex', gap: '8px' }}>
-                    <Clock size={16} color="#84cc16" />
+                <div style={{ padding: '12px', background: 'var(--color-bg-card)', borderRadius: '8px', border: '1px solid var(--color-border)' }}>
+                  <p style={{ fontSize: '12px', color: 'var(--color-text-muted)', display: 'flex', gap: '8px' }}>
+                    <Clock size={16} color="#00C2FF" />
                     <span>A primeira revisão será agendada para <strong>Amanhã</strong> (Intervalo de 1 dia). Ao completar, os intervalos aumentarão automaticamente.</span>
                   </p>
                 </div>

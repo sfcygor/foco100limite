@@ -36,7 +36,7 @@ export function SubjectManagerModal({ isOpen, onClose, onSubjectsChange }: Subje
   
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editName, setEditName] = useState('')
-  const [editColor, setEditColor] = useState('#84cc16')
+  const [editColor, setEditColor] = useState('#7B2CFF')
   const [editIcon, setEditIcon] = useState<IconName>('BookOpen')
 
   const [deletingId, setDeletingId] = useState<string | null>(null)
@@ -101,7 +101,7 @@ export function SubjectManagerModal({ isOpen, onClose, onSubjectsChange }: Subje
     } else {
       setEditingId('new')
       setEditName('')
-      setEditColor('#84cc16')
+      setEditColor('#7B2CFF')
       setEditIcon('BookOpen')
     }
   }
@@ -122,9 +122,9 @@ export function SubjectManagerModal({ isOpen, onClose, onSubjectsChange }: Subje
             className="glass-card"
             style={{ position: 'relative', width: '100%', maxWidth: '500px', maxHeight: '85vh', display: 'flex', flexDirection: 'column', zIndex: 1 }}
           >
-            <div style={{ padding: '24px', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#f9fafb' }}>Gerenciar Matérias</h2>
-              <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer' }}><X size={20} /></button>
+            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <h2 style={{ fontSize: '18px', fontWeight: 800, color: 'var(--color-text-primary)' }}>Gerenciar Matérias</h2>
+              <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'pointer' }}><X size={20} /></button>
             </div>
 
             <div style={{ padding: '24px', overflowY: 'auto', flex: 1, display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -134,8 +134,8 @@ export function SubjectManagerModal({ isOpen, onClose, onSubjectsChange }: Subje
                 <>
                   {subjects.map(sub => (
                     <div key={sub.id} style={{
-                      padding: '16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.04)'
+                      padding: '16px', borderRadius: '12px', background: 'rgba(45, 15, 80, 0.1)',
+                      border: '1px solid var(--color-bg-card)'
                     }}>
                       {editingId === sub.id ? (
                         <EditForm
@@ -162,10 +162,10 @@ export function SubjectManagerModal({ isOpen, onClose, onSubjectsChange }: Subje
                             <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: `${sub.color}20`, color: sub.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                               {SUBJECT_ICONS[sub.icon as IconName] || <BookOpen size={16} />}
                             </div>
-                            <span style={{ fontSize: '15px', fontWeight: 600, color: '#f9fafb' }}>{sub.name}</span>
+                            <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--color-text-primary)' }}>{sub.name}</span>
                           </div>
                           <div style={{ display: 'flex', gap: '8px' }}>
-                            <button onClick={() => startEdit(sub)} style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', padding: '4px' }}><Edit2 size={16} /></button>
+                            <button onClick={() => startEdit(sub)} style={{ background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'pointer', padding: '4px' }}><Edit2 size={16} /></button>
                             <button onClick={() => setDeletingId(sub.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '4px' }}><Trash2 size={16} /></button>
                           </div>
                         </div>
@@ -174,7 +174,7 @@ export function SubjectManagerModal({ isOpen, onClose, onSubjectsChange }: Subje
                   ))}
 
                   {editingId === 'new' ? (
-                    <div style={{ padding: '16px', borderRadius: '12px', background: 'rgba(132,204,22,0.05)', border: '1px solid rgba(132,204,22,0.2)' }}>
+                    <div style={{ padding: '16px', borderRadius: '12px', background: 'rgba(123,44,255,0.05)', border: '1px solid rgba(123,44,255,0.2)' }}>
                       <EditForm
                         name={editName} setName={setEditName}
                         color={editColor} setColor={setEditColor}
@@ -186,7 +186,7 @@ export function SubjectManagerModal({ isOpen, onClose, onSubjectsChange }: Subje
                   ) : (
                     <button onClick={() => startEdit()} style={{
                       padding: '16px', borderRadius: '12px', border: '1px dashed rgba(255,255,255,0.2)',
-                      background: 'none', color: '#84cc16', fontSize: '14px', fontWeight: 600, cursor: 'pointer',
+                      background: 'none', color: '#7B2CFF', fontSize: '14px', fontWeight: 600, cursor: 'pointer',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
                     }}>
                       <Plus size={16} /> Nova Matéria
@@ -203,14 +203,14 @@ export function SubjectManagerModal({ isOpen, onClose, onSubjectsChange }: Subje
 }
 
 function EditForm({ name, setName, color, setColor, icon, setIcon, onSave, onCancel }: any) {
-  const COLORS = ['#ef4444', '#f97316', '#f59e0b', '#84cc16', '#10b981', '#06b6d4', '#3b82f6', '#8b5cf6', '#d946ef', '#f43f5e']
+  const COLORS = ['#5A00FF', '#7B2CFF', '#CDB7FF', '#FF6A1A', '#FF8A33', '#FFC300', '#FFB000', '#00C2FF', '#00D5C7', '#FF2E8A']
   
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <input autoFocus type="text" className="input-glass" value={name} onChange={e => setName(e.target.value)} placeholder="Nome da matéria..." style={{ padding: '10px' }} />
       
       <div>
-        <label style={{ fontSize: '11px', color: '#9ca3af', marginBottom: '8px', display: 'block' }}>Cor</label>
+        <label style={{ fontSize: '11px', color: 'var(--color-text-muted)', marginBottom: '8px', display: 'block' }}>Cor</label>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
           {COLORS.map(c => (
             <button key={c} onClick={() => setColor(c)} style={{
@@ -221,12 +221,12 @@ function EditForm({ name, setName, color, setColor, icon, setIcon, onSave, onCan
       </div>
 
       <div>
-        <label style={{ fontSize: '11px', color: '#9ca3af', marginBottom: '8px', display: 'block' }}>Ícone</label>
+        <label style={{ fontSize: '11px', color: 'var(--color-text-muted)', marginBottom: '8px', display: 'block' }}>Ícone</label>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
           {Object.keys(SUBJECT_ICONS).map(k => (
             <button key={k} onClick={() => setIcon(k as IconName)} style={{
-              width: '32px', height: '32px', borderRadius: '8px', background: icon === k ? `${color}30` : 'rgba(255,255,255,0.05)',
-              color: icon === k ? color : '#9ca3af', border: icon === k ? `1px solid ${color}50` : '1px solid transparent', cursor: 'pointer',
+              width: '32px', height: '32px', borderRadius: '8px', background: icon === k ? `${color}30` : 'var(--color-bg-card)',
+              color: icon === k ? color : 'var(--color-text-muted)', border: icon === k ? `1px solid ${color}50` : '1px solid transparent', cursor: 'pointer',
               display: 'flex', alignItems: 'center', justifyContent: 'center'
             }}>
               {SUBJECT_ICONS[k as IconName]}

@@ -113,10 +113,10 @@ export default function CronogramaPage() {
     <div>
       <div style={{ marginBottom: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-          <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#f9fafb' }}>Cronograma Semanal</h1>
+          <h1 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--color-text-primary)' }}>Cronograma Semanal</h1>
           <div className="badge badge-neon">{completedAll}/{totalAll} concluídas</div>
         </div>
-        <p style={{ color: '#9ca3af', fontSize: '14px', fontStyle: 'italic' }}>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '14px', fontStyle: 'italic' }}>
           "Disciplina é a ponte entre metas e conquistas."
         </p>
       </div>
@@ -132,8 +132,8 @@ export default function CronogramaPage() {
             <div
               key={index}
               style={{
-                background: dragOver === index ? 'rgba(132,204,22,0.08)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${isToday ? 'rgba(132,204,22,0.3)' : dragOver === index ? 'rgba(132,204,22,0.2)' : 'rgba(255,255,255,0.07)'}`,
+                background: dragOver === index ? 'rgba(0,194,255,0.08)' : 'var(--color-bg-card)',
+                border: `1px solid ${isToday ? 'rgba(0,194,255,0.3)' : dragOver === index ? 'rgba(0,194,255,0.2)' : 'rgba(255,255,255,0.07)'}`,
                 borderRadius: '14px',
                 padding: '14px 10px',
                 minHeight: '300px',
@@ -147,16 +147,16 @@ export default function CronogramaPage() {
               <div style={{ textAlign: 'center', marginBottom: '12px' }}>
                 <div style={{
                   fontSize: '11px', fontWeight: 800, letterSpacing: '1px',
-                  color: isToday ? '#84cc16' : '#9ca3af',
+                  color: isToday ? '#00C2FF' : 'var(--color-text-muted)',
                 }}>
                   {label}
                 </div>
                 {isToday && (
-                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#84cc16',
-                    margin: '4px auto 0', boxShadow: '0 0 6px rgba(132,204,22,0.5)' }} />
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00C2FF',
+                    margin: '4px auto 0', boxShadow: '0 0 6px rgba(0,194,255,0.5)' }} />
                 )}
                 {dayItems.length > 0 && (
-                  <div style={{ fontSize: '10px', color: '#6b7280', marginTop: '4px' }}>
+                  <div style={{ fontSize: '10px', color: 'var(--color-text-muted)', marginTop: '4px' }}>
                     {done}/{dayItems.length}
                   </div>
                 )}
@@ -172,9 +172,9 @@ export default function CronogramaPage() {
                     onDragEnd={() => setDragging(null)}
                     style={{
                       padding: '8px 10px',
-                      background: item.done ? 'rgba(132,204,22,0.06)' : 'rgba(255,255,255,0.04)',
+                      background: item.done ? 'rgba(0,194,255,0.06)' : 'var(--color-bg-card)',
                       borderRadius: '8px',
-                      border: `1px solid ${item.done ? 'rgba(132,204,22,0.15)' : 'rgba(255,255,255,0.06)'}`,
+                      border: `1px solid ${item.done ? 'rgba(0,194,255,0.15)' : 'var(--color-border)'}`,
                       cursor: 'grab',
                       opacity: dragging === item.id ? 0.5 : 1,
                       transition: 'all 0.15s',
@@ -191,7 +191,7 @@ export default function CronogramaPage() {
                       />
                     ) : (
                       <p style={{
-                        fontSize: '12px', color: item.done ? '#6b7280' : '#d1d5db',
+                        fontSize: '12px', color: item.done ? 'var(--color-text-muted)' : 'var(--color-text-muted)',
                         textDecoration: item.done ? 'line-through' : 'none',
                         lineHeight: 1.3,
                       }}>
@@ -202,15 +202,15 @@ export default function CronogramaPage() {
                     <div style={{ display: 'flex', gap: '4px', marginTop: '6px', justifyContent: 'flex-end' }}>
                       <button onClick={() => handleToggle(item)}
                         style={{ padding: '3px', border: 'none', background: 'none',
-                          color: item.done ? '#84cc16' : '#6b7280', cursor: 'pointer' }}>
+                          color: item.done ? '#00C2FF' : 'var(--color-text-muted)', cursor: 'pointer' }}>
                         <Check size={12} />
                       </button>
                       <button onClick={() => handleEdit(item)}
-                        style={{ padding: '3px', border: 'none', background: 'none', color: '#6b7280', cursor: 'pointer' }}>
+                        style={{ padding: '3px', border: 'none', background: 'none', color: 'var(--color-text-muted)', cursor: 'pointer' }}>
                         <Edit3 size={12} />
                       </button>
                       <button onClick={() => handleDelete(item.id)}
-                        style={{ padding: '3px', border: 'none', background: 'none', color: '#6b7280', cursor: 'pointer' }}>
+                        style={{ padding: '3px', border: 'none', background: 'none', color: 'var(--color-text-muted)', cursor: 'pointer' }}>
                         <Trash2 size={12} />
                       </button>
                     </div>
@@ -231,9 +231,9 @@ export default function CronogramaPage() {
                     style={{ fontSize: '12px', padding: '6px 8px', marginBottom: '4px' }}
                   />
                   <button onClick={() => handleAdd(index)}
-                    style={{ width: '100%', padding: '5px', background: 'rgba(132,204,22,0.1)',
-                      border: '1px solid rgba(132,204,22,0.2)', borderRadius: '6px',
-                      color: '#84cc16', fontSize: '12px', cursor: 'pointer' }}>
+                    style={{ width: '100%', padding: '5px', background: 'rgba(0,194,255,0.1)',
+                      border: '1px solid rgba(0,194,255,0.2)', borderRadius: '6px',
+                      color: '#00C2FF', fontSize: '12px', cursor: 'pointer' }}>
                     Adicionar
                   </button>
                 </div>
@@ -241,13 +241,13 @@ export default function CronogramaPage() {
                 <button
                   onClick={() => setAdding(index)}
                   style={{ width: '100%', padding: '6px', background: 'none',
-                    border: '1px dashed rgba(255,255,255,0.1)', borderRadius: '8px',
+                    border: '1px dashed var(--color-border)', borderRadius: '8px',
                     color: '#4b5563', fontSize: '12px', cursor: 'pointer',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px',
                     transition: 'all 0.2s',
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(132,204,22,0.2)'; e.currentTarget.style.color = '#84cc16' }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#4b5563' }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,194,255,0.2)'; e.currentTarget.style.color = '#00C2FF' }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.color = '#4b5563' }}
                 >
                   <Plus size={12} /> Adicionar
                 </button>

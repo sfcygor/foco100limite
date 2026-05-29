@@ -128,9 +128,9 @@ export default function ObjetivosPage() {
   }
 
   const columns = [
-    { id: 'TODO', title: 'A Fazer', color: '#f59e0b' },
-    { id: 'IN_PROGRESS', title: 'Em Progresso', color: '#06b6d4' },
-    { id: 'DONE', title: 'Concluídos', color: '#84cc16' }
+    { id: 'TODO', title: 'A Fazer', color: '#FF8A33' },
+    { id: 'IN_PROGRESS', title: 'Em Progresso', color: '#00C2FF' },
+    { id: 'DONE', title: 'Concluídos', color: '#7B2CFF' }
   ]
 
   const activeItem = activeId ? objectives.find(o => o.id === activeId) : null
@@ -139,8 +139,8 @@ export default function ObjetivosPage() {
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
       <div style={{ marginBottom: '28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#f9fafb', marginBottom: '6px' }}>Objetivos e Metas</h1>
-          <p style={{ color: '#9ca3af', fontSize: '14px' }}>Organize seus estudos em um quadro Kanban flexível.</p>
+          <h1 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '6px' }}>Objetivos e Metas</h1>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>Organize seus estudos em um quadro Kanban flexível.</p>
         </div>
         <button onClick={() => setShowModal(true)} className="btn-neon" style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px' }}>
           <Plus size={18} /> Novo Objetivo
@@ -155,13 +155,13 @@ export default function ObjetivosPage() {
             {columns.map(col => {
               const colItems = objectives.filter(o => o.status === col.id)
               return (
-                <div key={col.id} className="glass-card" style={{ padding: '20px', background: 'rgba(255,255,255,0.02)' }}>
+                <div key={col.id} className="glass-card" style={{ padding: '20px', background: 'rgba(45, 15, 80, 0.1)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#f9fafb', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <h3 style={{ fontSize: '15px', fontWeight: 700, color: 'var(--color-text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <div style={{ width: 10, height: 10, borderRadius: '50%', background: col.color }} />
                       {col.title}
                     </h3>
-                    <span className="badge" style={{ background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}>{colItems.length}</span>
+                    <span className="badge" style={{ background: 'var(--color-bg-card)', color: 'var(--color-text-muted)' }}>{colItems.length}</span>
                   </div>
                   
                   <DroppableArea id={col.id} items={colItems} onDelete={handleDelete} />
@@ -183,16 +183,16 @@ export default function ObjetivosPage() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)' }} onClick={() => setShowModal(false)} />
             
             <motion.div initial={{ scale: 0.95, opacity: 0, y: 10 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0, y: 10 }} className="glass-card" style={{ position: 'relative', width: '100%', maxWidth: '400px', padding: '32px', zIndex: 1 }}>
-              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#f9fafb', marginBottom: '20px' }}>Novo Objetivo</h2>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '20px' }}>Novo Objetivo</h2>
               
               <form onSubmit={handleCreate} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div>
-                  <label style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px', display: 'block' }}>Título</label>
+                  <label style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '8px', display: 'block' }}>Título</label>
                   <input autoFocus type="text" className="input-glass" value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Ex: Fechar edital de Português" />
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px', display: 'block' }}>Matéria</label>
+                  <label style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '8px', display: 'block' }}>Matéria</label>
                   <select className="input-glass" value={newSubject} onChange={e => setNewSubject(e.target.value)}>
                     <option value="">Selecione...</option>
                     {subjects.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
@@ -200,12 +200,12 @@ export default function ObjetivosPage() {
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px', display: 'block' }}>Prazo (opcional)</label>
+                  <label style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '8px', display: 'block' }}>Prazo (opcional)</label>
                   <input type="date" className="input-glass" value={newDate} onChange={e => setNewDate(e.target.value)} />
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px', display: 'block' }}>Descrição (opcional)</label>
+                  <label style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '8px', display: 'block' }}>Descrição (opcional)</label>
                   <textarea className="input-glass" value={newDesc} onChange={e => setNewDesc(e.target.value)} rows={3} placeholder="Detalhes..." />
                 </div>
 
@@ -257,13 +257,13 @@ function ObjectiveCard({ objective, listeners, attributes, isOverlay, onDelete }
   
   return (
     <div className="glass-card" style={{ 
-      padding: '16px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)',
+      padding: '16px', background: 'var(--color-bg-card)', border: '1px solid var(--color-border)',
       boxShadow: isOverlay ? '0 10px 30px rgba(0,0,0,0.5)' : 'none',
       borderLeft: `3px solid ${objective.subject.color}`,
       position: 'relative'
     }}>
       <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-        <button {...attributes} {...listeners} style={{ background: 'none', border: 'none', color: '#6b7280', cursor: 'grab', padding: 0, marginTop: '2px' }}>
+        <button {...attributes} {...listeners} style={{ background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'grab', padding: 0, marginTop: '2px' }}>
           <GripVertical size={16} />
         </button>
         <div style={{ flex: 1 }}>
@@ -277,14 +277,14 @@ function ObjectiveCard({ objective, listeners, attributes, isOverlay, onDelete }
               </button>
             )}
           </div>
-          <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#f9fafb', marginBottom: '4px', lineHeight: 1.4 }}>{objective.title}</h4>
+          <h4 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: '4px', lineHeight: 1.4 }}>{objective.title}</h4>
           {objective.description && (
-            <p style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '12px', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+            <p style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '12px', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
               {objective.description}
             </p>
           )}
           {objective.deadline && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: isLate ? '#ef4444' : '#6b7280', fontWeight: isLate ? 600 : 400, marginTop: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: isLate ? '#ef4444' : 'var(--color-text-muted)', fontWeight: isLate ? 600 : 400, marginTop: '8px' }}>
               <Calendar size={12} />
               {format(new Date(objective.deadline), "dd/MM/yyyy")}
               {isLate && ' (Atrasado)'}

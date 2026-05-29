@@ -22,9 +22,9 @@ interface RankingData {
 
 function RankBadge({ position }: { position: number }) {
   if (position === 1) return <Crown size={18} color="#f59e0b" fill="#f59e0b" />
-  if (position === 2) return <Medal size={18} color="#9ca3af" fill="#9ca3af" />
+  if (position === 2) return <Medal size={18} color="var(--color-text-muted)" fill="var(--color-text-muted)" />
   if (position === 3) return <Star size={18} color="#f97316" fill="#f97316" />
-  return <span style={{ fontSize: '13px', fontWeight: 700, color: '#6b7280' }}>#{position}</span>
+  return <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-muted)' }}>#{position}</span>
 }
 
 export default function RankingPage() {
@@ -43,13 +43,13 @@ export default function RankingPage() {
       <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
           <Trophy size={22} color="#f59e0b" />
-          <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#f9fafb' }}>Ranking</h1>
+          <h1 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--color-text-primary)' }}>Ranking</h1>
         </div>
-        <p style={{ color: '#9ca3af', fontSize: '14px' }}>Compare seu desempenho com outros estudantes</p>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>Compare seu desempenho com outros estudantes</p>
       </div>
 
       <div style={{ display: 'flex', gap: '4px', marginBottom: '24px', padding: '4px',
-        background: 'rgba(255,255,255,0.04)', borderRadius: '12px', width: 'fit-content' }}>
+        background: 'var(--color-bg-card)', borderRadius: '12px', width: 'fit-content' }}>
         {[
           { key: 'week', label: '🗓 Ranking Semanal' },
           { key: 'global', label: '🌐 Ranking Global' },
@@ -57,8 +57,8 @@ export default function RankingPage() {
           <button key={key} onClick={() => setTab(key as any)}
             style={{
               padding: '8px 20px', borderRadius: '9px', border: 'none', cursor: 'pointer',
-              background: tab === key ? 'rgba(132,204,22,0.2)' : 'none',
-              color: tab === key ? '#84cc16' : '#9ca3af',
+              background: tab === key ? 'rgba(0,194,255,0.2)' : 'none',
+              color: tab === key ? '#00C2FF' : 'var(--color-text-muted)',
               fontSize: '13px', fontWeight: 600, transition: 'all 0.2s',
             }}>
             {label}
@@ -73,7 +73,7 @@ export default function RankingPage() {
       ) : !list?.length ? (
         <div className="glass-card" style={{ padding: '48px', textAlign: 'center' }}>
           <Trophy size={48} color="#374151" style={{ margin: '0 auto 16px' }} />
-          <p style={{ color: '#6b7280', fontSize: '16px' }}>Nenhum dado disponível ainda.</p>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '16px' }}>Nenhum dado disponível ainda.</p>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -89,11 +89,11 @@ export default function RankingPage() {
                 style={{
                   padding: '18px 22px',
                   background: user.isCurrentUser
-                    ? 'rgba(132,204,22,0.08)'
-                    : isTop3 ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.03)',
+                    ? 'rgba(0,194,255,0.08)'
+                    : isTop3 ? 'var(--color-bg-card)' : 'var(--color-bg-card)',
                   border: user.isCurrentUser
-                    ? '1px solid rgba(132,204,22,0.25)'
-                    : `1px solid ${isTop3 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.05)'}`,
+                    ? '1px solid rgba(0,194,255,0.25)'
+                    : `1px solid ${isTop3 ? 'var(--color-border)' : 'var(--color-bg-card)'}`,
                   borderRadius: '14px',
                   display: 'flex', alignItems: 'center', gap: '16px',
                   transition: 'all 0.2s',
@@ -114,11 +114,11 @@ export default function RankingPage() {
                 <div className="avatar" style={{
                   width: '40px', height: '40px', fontSize: '14px',
                   background: user.isCurrentUser
-                    ? 'linear-gradient(135deg, #84cc16, #65a30d)'
+                    ? 'linear-gradient(135deg, #00C2FF, #7B2CFF)'
                     : isTop3
-                    ? `linear-gradient(135deg, ${pos === 1 ? '#f59e0b' : pos === 2 ? '#9ca3af' : '#f97316'}, transparent)`
-                    : 'rgba(255,255,255,0.1)',
-                  color: user.isCurrentUser || isTop3 ? '#0b0f17' : '#9ca3af',
+                    ? `linear-gradient(135deg, ${pos === 1 ? '#f59e0b' : pos === 2 ? 'var(--color-text-muted)' : '#f97316'}, transparent)`
+                    : 'var(--color-border)',
+                  color: user.isCurrentUser || isTop3 ? 'var(--color-bg-primary)' : 'var(--color-text-muted)',
                 }}>
                   {getInitials(user.name)}
                 </div>
@@ -126,7 +126,7 @@ export default function RankingPage() {
                 {/* Name */}
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '15px', fontWeight: 700, color: user.isCurrentUser ? '#84cc16' : '#f9fafb' }}>
+                    <span style={{ fontSize: '15px', fontWeight: 700, color: user.isCurrentUser ? '#00C2FF' : 'var(--color-text-primary)' }}>
                       {user.name}
                     </span>
                     {user.isCurrentUser && (
@@ -144,12 +144,12 @@ export default function RankingPage() {
                 {/* Stats */}
                 <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
                   <div style={{ textAlign: 'right' }}>
-                    <div style={{ fontSize: '18px', fontWeight: 800, color: '#84cc16' }}>{hours}h</div>
-                    <div style={{ fontSize: '11px', color: '#6b7280' }}>horas</div>
+                    <div style={{ fontSize: '18px', fontWeight: 800, color: '#00C2FF' }}>{hours}h</div>
+                    <div style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>horas</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ fontSize: '18px', fontWeight: 800, color: '#f59e0b' }}>{questions}</div>
-                    <div style={{ fontSize: '11px', color: '#6b7280' }}>questões</div>
+                    <div style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>questões</div>
                   </div>
                 </div>
               </div>
