@@ -1,0 +1,152 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String?
+  email        String   @unique
+  password     String?
+  image        String?  // We'll store Base64 here for local dev
+  dailyGoalHours   Int  @default(3)
+  weeklyGoalHours  Int  @default(20)
+  monthlyGoalHours Int  @default(60)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  sessions      StudySession[]
+  subjects      Subject[]
+  scheduleItems ScheduleItem[]
+  achievements  UserAchievement[]
+  accounts      Account[]
+  revisions     Revision[]
+  objectives    Objective[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Subject {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  color     String   @default("#84cc16")
+  icon      String   @default("BookOpen") // Added icon field
+  createdAt DateTime @default(now())
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessions      StudySession[]
+  scheduleItems ScheduleItem[]
+  revisions     Revision[]
+  objectives    Objective[]
+}
+
+model StudySession {
+  id         String   @id @default(cuid())
+  userId     String
+  subjectId  String
+  duration   Int      // in seconds
+  questions  Int      @default(0)
+  correct    Int      @default(0)
+  date       DateTime @default(now())
+  note       String?
+  createdAt  DateTime @default(now())
+
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject   Subject    @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  revisions Revision[] // A study session can spawn revisions
+}
+
+model ScheduleItem {
+  id        String   @id @default(cuid())
+  userId    String
+  subjectId String?
+  dayOfWeek Int      // 0=Sun, 1=Mon, ... 6=Sat
+  title     String
+  done      Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject Subject? @relation(fields: [subjectId], references: [id], onDelete: SetNull)
+}
+
+model Achievement {
+  id          String @id @default(cuid())
+  key         String @unique
+  title       String
+  description String
+  icon        String
+  category    String @default("general")
+  threshold   Int    @default(0)
+
+  userAchievements UserAchievement[]
+}
+
+model UserAchievement {
+  id            String   @id @default(cuid())
+  userId        String
+  achievementId String
+  progress      Int      @default(0)
+  unlockedAt    DateTime?
+  createdAt     DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+}
+
+// NOVO: Sistema de Revisões (Repetição Espaçada)
+model Revision {
+  id             String       @id @default(cuid())
+  userId         String
+  subjectId      String
+  studySessionId String?      
+  title          String       
+  lastDate       DateTime     @default(now())
+  nextDate       DateTime     
+  intervalDays   Int          @default(1)
+  completedCount Int          @default(0)
+  createdAt      DateTime     @default(now())
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject      Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  studySession StudySession? @relation(fields: [studySessionId], references: [id], onDelete: Cascade)
+}
+
+// NOVO: Sistema de Objetivos
+model Objective {
+  id          String    @id @default(cuid())
+  userId      String
+  subjectId   String
+  title       String
+  description String?
+  deadline    DateTime? 
+  status      String    @default("TODO") // "TODO", "IN_PROGRESS", "DONE"
+  createdAt   DateTime  @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+}
